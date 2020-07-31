@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+import Categories from './components/CatList/Categories'
+
+import Layout from './components/Layout';
+import HeroIntro from './components/HeroIntro'
+import NewSection from './components/NewSection'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css'
+
+
+export default function App() {
+ 
+  return(
+    <Layout>
+      <HeroIntro />
+      <NewSection title='What are you craving for?'
+      containerClass='my-3' 
+      subtitle='We can give some ideas for your next meal based on the following categories:'>
+        <Categories />
+      </NewSection>
+    </Layout>
+  )
 }
 
-export default App;
+

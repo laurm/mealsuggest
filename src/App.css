@@ -1,3 +1,46 @@
+@import './assets/fonts/fonts.css';
+
+body {
+  background-color: #DCEDFF;
+  font-family: 'Gotham Rounded';
+}
+
+.multi-line-truncate {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-weight: 300;
+}
+
+.card-cat {
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+  border: 0;
+}
+
+.card-cat:hover {
+  cursor: pointer;
+  box-shadow: 0 .8rem 1rem rgba(0,0,0,.15);
+}
+
+.heroText {
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+
+.modal-body img {
+  max-width: 100%;
+  border-radius: 1rem;
+  margin: 1rem 0;
+}
+
+section .subtitle {
+  font-weight: 300;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+/* 
 .App {
   text-align: center;
 }
@@ -35,4 +78,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
