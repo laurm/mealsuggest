@@ -15,8 +15,6 @@ export default () => {
     const [catSelected, setCatSelected] = useState('Beef')
     const [catData, setCatData] = useState([])
     const [randMeal, setRandMeal] = useState({})
-    const [suggestClick, setSuggestClick] = useState(false)
-    const [aiureaData, setAiureaData] = useState()
 
     const [showModal, setShowModal] = useState(false);
 
@@ -29,17 +27,6 @@ export default () => {
             console.log(err)
         })
     }, [])
-
-    // useEffect(() => {
-    //     fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${catSelected}`)
-    //     .then(res => 
-    //         res.json()
-    //     )
-    //     .then(data => {
-    //         const rand = Math.floor(Math.random() * data.meals.length)
-    //         setCatData(data.meals[rand])})
-    //     .catch(err => console.log(err))
-    // }, [suggestClick])
 
     useEffect(() => {
         if (catSelected.length > 0) {
