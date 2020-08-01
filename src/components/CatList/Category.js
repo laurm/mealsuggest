@@ -32,7 +32,7 @@ export default (props) => {
                 <Card.Text className='multi-line-truncate'>
                     {props.description}
                 </Card.Text>
-                <Button variant='outline-dark' onClick={props.action1}>Suggest</Button>
+                <Button variant='outline-dark' onClick={props.action}>Suggest</Button>
             </Card.Body>
         </Card>
     )

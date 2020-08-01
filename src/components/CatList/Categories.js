@@ -10,52 +10,68 @@ import Col from 'react-bootstrap/Col'
 import PopoverBtn from '../PopoverBtn'
 
 export default () => {
-const [categoryList, setCategoryList] = useState([]);
+    const [categoryList, setCategoryList] = useState([]);
 
-const [catSelected, setCatSelected] = useState('Beef')
-const [catData, setCatData] = useState({})
-const [suggestClick, setSuggestClick] = useState(false)
+    const [catSelected, setCatSelected] = useState('Beef')
+    const [catData, setCatData] = useState([])
+    const [randMeal, setRandMeal] = useState({})
+    const [suggestClick, setSuggestClick] = useState(false)
+    const [aiureaData, setAiureaData] = useState()
 
-const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+
+    useEffect(() => {
+        axios.get('https://www.themealdb.com/api/json/v1/1/categories.php')
+        .then(res => {
+            setCategoryList(res.data.categories)
+            })
+        .catch(err => {
+            console.log(err)
+        })
+    }, [])
+
+    // useEffect(() => {
+    //     fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${catSelected}`)
+    //     .then(res => 
+    //         res.json()
+    //     )
+    //     .then(data => {
+    //         const rand = Math.floor(Math.random() * data.meals.length)
+    //         setCatData(data.meals[rand])})
+    //     .catch(err => console.log(err))
+    // }, [suggestClick])
+
+    useEffect(() => {
+        if (catSelected.length > 0) {
+            fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${catSelected}`)
+        .then(res => 
+            res.json()
+        )
+        .then(data => {
+            const rand = Math.floor(Math.random() * data.meals.length)
+            setCatData(data.meals)
+            setRandMeal(data.meals[rand])
+            })
+        .catch(err => console.log(err))
+        }
+    }, [catSelected])
 
     const handleCloseModal = () => setShowModal(false);
     const handleShowModal = () => setShowModal(true);
+        
 
-useEffect(() => {
-    axios.get('https://www.themealdb.com/api/json/v1/1/categories.php')
-     .then(res => {
-        setCategoryList(res.data.categories)
-        })
-     .catch( err => {
-         console.log(err)
-     })
-}, [])
+    const getRandomMeal = () => {
+        const rand = Math.floor(Math.random() * catData.length)
+        setRandMeal(catData[rand]);
+    }
 
-useEffect(() => {
-    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${catSelected}`)
-    .then(res => 
-        res.json()
-    )
-    .then(data => {
-        const rand = Math.floor(Math.random() * data.meals.length)
-        setCatData(data.meals[rand])})
-    .catch(err => console.log(err))
-}, [suggestClick])
+    const callCatSet = (name) => {
+        setCatSelected(name)
+        handleShowModal()
+    }
 
-
-const handleClick = (name) => {
-    setSuggestClick(!suggestClick)
-    setCatSelected(name);
-    handleShowModal()
-}
-
-const handleBtn = () => {
-    handleShowModal()
-    setSuggestClick(!suggestClick)
-}
-
-    return (
-       <>   
+        return (
+        <>
             {categoryList.map((item, index) => {
                 return (
                     <Col sm={6} lg={4} className='my-4 px-3 px-sm-2' key={item.idCategory}>
@@ -64,28 +80,27 @@ const handleBtn = () => {
                         name={item.strCategory} 
                         imageSrc={item.strCategoryThumb}
                         description={item.strCategoryDescription}
-                        action1={() => handleClick(item.strCategory)}
-                        action2={handleBtn}
+                        action={() => callCatSet(item.strCategory)}
                         />
                     </Col>
                 ) 
             })}
 
-           <Modal show={showModal} onHide={handleCloseModal} centered>
+            <Modal show={showModal} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton className='border-0'>
                 <Modal.Title>Suggestion from {catSelected} category</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                     {Object.keys(catData).length > 0 ? (<>
-                         <span>{catData.strMeal}</span>
-                         <Image src={catData.strMealThumb} />
-                         </>) : null }
+                    {Object.keys(randMeal).length > 0 ? (<>
+                        <span>{randMeal.strMeal}</span>
+                        <Image src={randMeal.strMealThumb} />
+                        </>) : null }
                         <div className='d-flex justify-content-around mt-2'>
                             <PopoverBtn />
-                            <Button variant='danger' onClick={()=> setSuggestClick(!suggestClick)}>Suggest again</Button>
+                            <Button variant='danger' onClick={() => getRandomMeal()}>Suggest again</Button>
                         </div>
                 </Modal.Body>
             </Modal>
         </>
-    )
+        )
 }
