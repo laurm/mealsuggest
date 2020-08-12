@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { Link } from 'react-router-dom';
 
 import Modal from 'react-bootstrap/Modal'
 import Container from 'react-bootstrap/Container'
@@ -6,8 +7,6 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image'
-
-import PopoverBtn from './PopoverBtn'
 
 import dinnerSVG from '../assets/dinner.svg';
 
@@ -17,6 +16,7 @@ export default () => {
     const [mealSuggest, setMealSuggest] = useState({});
     const [getSuggest, setGetSuggest] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [suggestID, setSuggestID] = useState('');
     
 
     const handleCloseModal = () => setShowModal(false);
@@ -65,7 +65,7 @@ export default () => {
                         {/* <span>Area: </span>{mealSuggest.strArea} */}
                         <Image src={mealSuggest.strMealThumb} />
                         <div className='d-flex justify-content-around mt-2'>
-                            <PopoverBtn />
+                            <Link to={`/recipe/${mealSuggest.idMeal}`}><Button variant='success'>Check Recipe</Button></Link>
                             <Button variant='danger' onClick={() => {setGetSuggest(!getSuggest)}}>Suggest again</Button>
                         </div>
                 </Modal.Body>

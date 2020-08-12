@@ -7,7 +7,7 @@ export default (props) => {
     return (
             <>
             <Navbar />
-                {props.children}
+                <div className='page-content'>{props.children}</div>
             <Footer />
             </>
     )

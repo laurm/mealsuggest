@@ -1,27 +1,37 @@
 import React from 'react';
 
+import Home from './pages/Home'
+import About from './pages/About'
+import Users from './pages/Users'
+import Recipe from './components/Recipes/Recipe'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
-import Categories from './components/CatList/Categories'
-
-import Layout from './components/Layout';
-import HeroIntro from './components/HeroIntro'
-import NewSection from './components/NewSection'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 
-
 export default function App() {
- 
   return(
-    <Layout>
-      <HeroIntro />
-      <NewSection title='What are you craving for?'
-      containerClass='my-3' 
-      subtitle='We can give some ideas for your next meal based on the following categories:'>
-        <Categories />
-      </NewSection>
-    </Layout>
+    <Router>
+      <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/users">
+            <Users />
+          </Route>
+          <Route path="/recipe/:id" children={<Recipe />} />
+      </Switch>
+    </Router>
   )
 }
 
-
+// function Users() {
+//   return <h2>Users</h2>;
+// }

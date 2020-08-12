@@ -40,6 +40,17 @@ section .subtitle {
   text-align: center;
 }
 
+.page-content {
+  min-height: calc(100vh - 10rem);
+}
+/* .footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-weight: 300;
+} */
+
 /* 
 .App {
   text-align: center;

@@ -1,0 +1,21 @@
+.mainImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
+}
+
+.instructions {
+    margin-top: .5rem;
+    display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 15;
+  overflow: auto;
+  font-weight: 300;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none; 
+}
+
+.instructions::-webkit-scrollbar {
+   display: none;
+}
