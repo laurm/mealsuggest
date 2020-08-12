@@ -19,8 +19,8 @@ export default () => {
 
     const [showModal, setShowModal] = useState(false);
 
-    const [mealData, setMealData] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
+    // const [mealData, setMealData] = useState([])
+    // const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         axios.get('https://www.themealdb.com/api/json/v1/1/categories.php')
